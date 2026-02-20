@@ -1,0 +1,37 @@
+//
+//  TaskListViewModel.swift
+//  TaskManager
+//
+//  Created by Nitesh Parihar on 20/02/26.
+//
+
+import SwiftUI
+import Combine
+
+final class TaskListViewModel: ObservableObject {
+
+    @Published var tasks: [Task] = []
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String?
+
+    private let taskService: TaskServiceProtocol
+
+    init(taskService: TaskServiceProtocol = TaskService()) {
+        self.taskService = taskService
+    }
+
+    @MainActor
+    func loadTasks() async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let result = try await taskService.getTasks()
+            tasks = result
+        } catch {
+            errorMessage = "Unable to load tasks"
+        }
+
+        isLoading = false
+    }
+}
