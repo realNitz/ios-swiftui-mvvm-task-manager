@@ -34,4 +34,15 @@ final class TaskListViewModel: ObservableObject {
 
         isLoading = false
     }
+    
+    @MainActor
+    func addTask(title: String) {
+        let newTask = Task(
+            id: (tasks.map { $0.id }.max() ?? 0) + 1,
+            title: title,
+            completed: false
+        )
+        tasks.insert(newTask, at: 0)
+    }
+
 }

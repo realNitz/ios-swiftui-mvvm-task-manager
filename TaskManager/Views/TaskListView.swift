@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskListView: View {
 
+    @State private var showAddTask = false
     @StateObject private var viewModel = TaskListViewModel()
 
     var body: some View {
@@ -29,6 +30,22 @@ struct TaskListView: View {
             .task {
                 await viewModel.loadTasks()
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAddTask = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddTask) {
+                AddTaskView { title in
+                    viewModel.addTask(title: title)
+                }
+            }
+
+            
         }
     }
 }
