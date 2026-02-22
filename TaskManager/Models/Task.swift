@@ -9,6 +9,7 @@ import Foundation
 
 struct Task: Identifiable, Codable {
     let id: Int
-    let title: String
-    let completed: Bool
+    var title: String
+    var completed: Bool
 }
+

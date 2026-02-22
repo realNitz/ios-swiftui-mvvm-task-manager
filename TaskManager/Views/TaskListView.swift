@@ -10,6 +10,8 @@ import SwiftUI
 struct TaskListView: View {
 
     @State private var showAddTask = false
+    @State private var selectedTask: Task?
+
     @StateObject private var viewModel = TaskListViewModel()
 
     var body: some View {
@@ -21,9 +23,27 @@ struct TaskListView: View {
                     Text(error)
                         .foregroundColor(.red)
                 } else {
-                    List(viewModel.tasks) { task in
-                        TaskRowView(task: task)
+                    List {
+                        ForEach(viewModel.tasks) { task in
+                            HStack {
+                                Text(task.title)
+                                Spacer()
+                                Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedTask = task
+                            }
+                        }
+                        .onDelete(perform: viewModel.deleteTask)
                     }
+                    .sheet(item: $selectedTask) { task in
+                           EditTaskView(task: task) { newTitle in
+                               viewModel.updateTask(task, newTitle: newTitle)
+                           }
+                       }
+
+
                 }
             }
             .navigationTitle("Tasks")

@@ -45,4 +45,21 @@ final class TaskListViewModel: ObservableObject {
         tasks.insert(newTask, at: 0)
     }
 
+    @MainActor
+    func deleteTask(at offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
+    }
+
+    @MainActor
+    func toggleCompletion(for task: Task) {
+        guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
+        tasks[index].completed.toggle()
+    }
+
+    @MainActor
+    func updateTask(_ task: Task, newTitle: String) {
+        guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
+        tasks[index].title = newTitle
+    }
+
 }

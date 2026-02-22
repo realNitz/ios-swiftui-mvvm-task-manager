@@ -10,13 +10,19 @@ import SwiftUI
 struct TaskRowView: View {
 
     let task: Task
+    let onToggle: (Task) -> Void
 
     var body: some View {
         HStack {
-            Text(task.title)
-            Spacer()
             Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
                 .foregroundColor(task.completed ? .green : .gray)
-        }
-    }
+                .onTapGesture {
+                    onToggle(task)
+                }
+
+            Text(task.title)
+                .strikethrough(task.completed)
+
+            Spacer()
+        }    }
 }
