@@ -13,7 +13,9 @@ final class TaskListViewModel: ObservableObject {
     @Published var tasks: [Task] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var isRefreshing: Bool = false
 
+    
     private let taskService: TaskServiceProtocol
 
     init(taskService: TaskServiceProtocol = TaskService()) {
@@ -21,18 +23,25 @@ final class TaskListViewModel: ObservableObject {
     }
 
     @MainActor
-    func loadTasks() async {
-        isLoading = true
-        errorMessage = nil
+    func loadTasks(isRefresh: Bool = false) async {
+        if isRefresh {
+            isRefreshing = true
+        } else {
+            isLoading = true
+            errorMessage = nil
+        }
 
         do {
             let result = try await taskService.getTasks()
             tasks = result
         } catch {
-            errorMessage = "Unable to load tasks"
+            if !isRefresh {
+                errorMessage = "Unable to load tasks"
+            }
         }
 
         isLoading = false
+        isRefreshing = false
     }
     
     @MainActor

@@ -57,7 +57,9 @@ struct TaskListView: View {
                     taskRow(task)
                 }
             }
-            .listStyle(.plain)
+            .refreshable {
+                await viewModel.loadTasks(isRefresh: true)
+            }
         }
     }
 
