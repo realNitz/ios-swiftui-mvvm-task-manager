@@ -4,6 +4,15 @@ A simple **Task Manager iOS application** built using **SwiftUI** that
 demonstrates modern iOS development practices such as MVVM architecture,
 async/await networking, pull‑to‑refresh, and sheet‑based editing.
 
+<img width="331" height="660" alt="Screenshot 2026-03-05 at 3 42 37 PM" src="https://github.com/user-attachments/assets/83f55f4d-d9ad-4c7a-983c-0e4576150ff3" />
+
+<img width="326" height="662" alt="Screenshot 2026-03-05 at 3 42 52 PM" src="https://github.com/user-attachments/assets/06a035f3-ff40-4949-b188-b72d0ea6125e" />
+
+<img width="321" height="667" alt="Screenshot 2026-03-05 at 3 43 07 PM" src="https://github.com/user-attachments/assets/ea8f9115-d5b0-473c-8720-f8489bd06625" />
+
+<img width="334" height="662" alt="Screenshot 2026-03-05 at 3 43 47 PM" src="https://github.com/user-attachments/assets/a1f55a14-840f-4d16-9960-e558308adc48" />
+
+
 ## Features
 
 -   View list of tasks
@@ -31,7 +40,7 @@ async/await networking, pull‑to‑refresh, and sheet‑based editing.
 
 ### Milestone 3
 
--   Add/Edit Task UI
+-   Add/Edit/Delete Task UI
 -   Sheet based edit screen
 
 ### Milestone 4
@@ -86,7 +95,6 @@ async/await networking, pull‑to‑refresh, and sheet‑based editing.
 
 ## Future Improvements
 
--   Task deletion
 -   Local persistence using CoreData
 -   Better UI/UX
 -   Unit testing
